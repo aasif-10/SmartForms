@@ -57,7 +57,7 @@ Since this extension is currently in development, you can install it manually in
 ## Contributing
 
 Contributions, issues, and feature requests are welcome. 
-Please check the [issues page](https://github.com/aasif-10/SmartForms/issues) if you would like to contribute.
+Please check the [issues page](https://github.com/aasif-10/SmartForms/issues) and read our [Contributing Guidelines](CONTRIBUTING.md) if you would like to contribute.
 
 ## License
 
