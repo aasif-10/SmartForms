@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartForm Saver — Test Forms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #0f172a; color: #f1f5f9; padding: 32px; }
+    h1 { font-size: 24px; margin-bottom: 8px; background: linear-gradient(135deg, #f1f5f9, #06b6d4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #64748b; margin-bottom: 32px; }
+    .form-section { background: #1e293b; border: 1px solid rgba(100, 116, 139, 0.2); border-radius: 12px; padding: 24px; margin-bottom: 24px; max-width: 500px; }
+    .form-section h2 { font-size: 16px; color: #06b6d4; margin-bottom: 4px; }
+    .form-section p { font-size: 12px; color: #64748b; margin-bottom: 16px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 500; color: #94a3b8; margin-bottom: 4px; }
+    .form-group label .required { color: #ef4444; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px 14px; background: #0f172a; border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 8px; color: #f1f5f9; font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.15s; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: rgba(6, 182, 212, 0.5); box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #475569; }
+    .form-group select { cursor: pointer; appearance: none; }
+    .form-group select option { background: #1e293b; }
+    .form-group textarea { resize: vertical; min-height: 60px; }
+    button[type="submit"] { padding: 10px 24px; background: linear-gradient(135deg, #06b6d4, #0ea5e9); color: white; font-weight: 600; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; }
+    button[type="submit"]:hover { filter: brightness(1.1); }
+    hr { border: none; border-top: 1px solid rgba(100, 116, 139, 0.2); margin: 32px 0; }
+    .sensitive-section { border-color: rgba(239, 68, 68, 0.3); }
+    .sensitive-section h2 { color: #ef4444; }
+  </style>
+</head>
+<body>
+  <h1>SmartForm Saver — Test Forms</h1>
+  <p class="subtitle">Use these forms to test field detection, classification, and save/autofill flows.</p>
+
+  <!-- ─── Form 1: Full Name + Standard Fields ──────────────────── -->
+  <div class="form-section">
+    <h2>Form 1: Standard Contact Info</h2>
+    <p>Tests: full_name, email, phone detection</p>
+    <form>
+      <div class="form-group">
+        <label for="f1-name">Full Name <span class="required">*</span></label>
+        <input type="text" id="f1-name" placeholder="Enter your full name" autocomplete="name" />
+      </div>
+      <div class="form-group">
+        <label for="f1-email">Email Address <span class="required">*</span></label>
+        <input type="email" id="f1-email" placeholder="your@email.com" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label for="f1-phone">Phone Number</label>
+        <input type="tel" id="f1-phone" placeholder="+91 XXXXX XXXXX" autocomplete="tel" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- ─── Form 2: First Name / Last Name Split ─────────────────── -->
+  <div class="form-section">
+    <h2>Form 2: Split Name Fields</h2>
+    <p>Tests: first_name vs last_name distinction, email alias matching</p>
+    <form>
+      <div class="form-group">
+        <label for="f2-first">First Name <span class="required">*</span></label>
+        <input type="text" id="f2-first" placeholder="First name" autocomplete="given-name" />
+      </div>
+      <div class="form-group">
+        <label for="f2-last">Last Name <span class="required">*</span></label>
+        <input type="text" id="f2-last" placeholder="Last name" autocomplete="family-name" />
+      </div>
+      <div class="form-group">
+        <label for="f2-email">E-mail <span class="required">*</span></label>
+        <input type="email" id="f2-email" placeholder="your@email.com" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- ─── Form 3: Education/Registration Info ──────────────────── -->
+  <div class="form-section">
+    <h2>Form 3: Student Registration</h2>
+    <p>Tests: register_number, college, department, fuzzy matching (Reg. No.)</p>
+    <form>
+      <div class="form-group">
+        <label for="f3-reg">Reg. No. <span class="required">*</span></label>
+        <input type="text" id="f3-reg" aria-label="Register Number" placeholder="Enter your register number" />
+      </div>
+      <div class="form-group">
+        <label for="f3-college">College <span class="required">*</span></label>
+        <input type="text" id="f3-college" placeholder="Your college name" />
+      </div>
+      <div class="form-group">
+        <label for="f3-dept">Department</label>
+        <input type="text" id="f3-dept" placeholder="Department / Branch" />
+      </div>
+      <div class="form-group">
+        <label for="f3-year">Year of Study</label>
+        <select id="f3-year">
+          <option value="">Select year</option>
+          <option value="1">1st Year</option>
+          <option value="2">2nd Year</option>
+          <option value="3">3rd Year</option>
+          <option value="4">4th Year</option>
+        </select>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- ─── Form 4: Ambiguous "Name" Field ───────────────────────── -->
+  <div class="form-section">
+    <h2>Form 4: Ambiguous Name</h2>
+    <p>Tests: "Name" field ambiguity resolution. Should detect as full_name (no Last Name sibling).</p>
+    <form>
+      <div class="form-group">
+        <label for="f4-name">Name <span class="required">*</span></label>
+        <input type="text" id="f4-name" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label for="f4-email">Email <span class="required">*</span></label>
+        <input type="email" id="f4-email" placeholder="Email address" />
+      </div>
+      <div class="form-group">
+        <label for="f4-phone">Mobile Number</label>
+        <input type="tel" id="f4-phone" placeholder="Phone number" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <hr />
+
+  <!-- ─── Form 5: Address Fields ───────────────────────────────── -->
+  <div class="form-section">
+    <h2>Form 5: Address</h2>
+    <p>Tests: address, city, state, country, postal_code</p>
+    <form>
+      <div class="form-group">
+        <label for="f5-address">Street Address</label>
+        <textarea id="f5-address" placeholder="Enter your address" autocomplete="street-address"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="f5-city">City</label>
+        <input type="text" id="f5-city" placeholder="City" autocomplete="address-level2" />
+      </div>
+      <div class="form-group">
+        <label for="f5-state">State</label>
+        <input type="text" id="f5-state" placeholder="State" autocomplete="address-level1" />
+      </div>
+      <div class="form-group">
+        <label for="f5-pin">Pincode</label>
+        <input type="text" id="f5-pin" placeholder="600XXX" autocomplete="postal-code" />
+      </div>
+      <div class="form-group">
+        <label for="f5-country">Country</label>
+        <input type="text" id="f5-country" placeholder="Country" autocomplete="country-name" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <hr />
+
+  <!-- ─── Form 6: Sensitive Fields (should NOT be saved) ────────── -->
+  <div class="form-section sensitive-section">
+    <h2>Form 6: Sensitive Fields (Should NOT be saved)</h2>
+    <p>Tests: password, OTP, CVV, credit card fields must be ignored by the extension.</p>
+    <form>
+      <div class="form-group">
+        <label for="f6-user">Username</label>
+        <input type="text" id="f6-user" placeholder="Username" />
+      </div>
+      <div class="form-group">
+        <label for="f6-pass">Password</label>
+        <input type="password" id="f6-pass" placeholder="Enter password" />
+      </div>
+      <div class="form-group">
+        <label for="f6-otp">OTP</label>
+        <input type="text" id="f6-otp" placeholder="Enter OTP" autocomplete="one-time-code" />
+      </div>
+      <div class="form-group">
+        <label for="f6-card">Credit Card Number</label>
+        <input type="text" id="f6-card" placeholder="XXXX XXXX XXXX XXXX" autocomplete="cc-number" />
+      </div>
+      <div class="form-group">
+        <label for="f6-cvv">CVV</label>
+        <input type="text" id="f6-cvv" placeholder="XXX" autocomplete="cc-csc" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- ─── Form 7: Google Forms-like Structure ──────────────────── -->
+  <div class="form-section">
+    <h2>Form 7: Google Forms Simulation</h2>
+    <p>Tests: aria-label based detection, data-params, role attributes</p>
+    <form>
+      <div data-params="%.@.[0,&quot;Your Name&quot;,null,null]" role="listitem">
+        <div role="heading" aria-level="3">Your Name</div>
+        <div class="form-group">
+          <input type="text" aria-label="Your Name" role="textbox" />
+        </div>
+      </div>
+      <div data-params="%.@.[1,&quot;Registration Number&quot;,null,null]" role="listitem">
+        <div role="heading" aria-level="3">Registration Number</div>
+        <div class="form-group">
+          <input type="text" aria-label="Registration Number" role="textbox" />
+        </div>
+      </div>
+      <div data-params="%.@.[2,&quot;Email ID&quot;,null,null]" role="listitem">
+        <div role="heading" aria-level="3">Email ID</div>
+        <div class="form-group">
+          <input type="text" aria-label="Email ID" role="textbox" />
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Prevent form submissions
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Form submitted (prevented for testing)');
+      });
+    });
+  </script>
+</body>
+</html>
