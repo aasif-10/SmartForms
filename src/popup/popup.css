@@ -8,26 +8,88 @@
 /* ─── Foundation ──────────────────────────────────────────────────── */
 
 :root {
-  --sf-bg-primary: #0f172a;
-  --sf-bg-secondary: #1e293b;
-  --sf-bg-tertiary: #334155;
-  --sf-bg-hover: rgba(6, 182, 212, 0.08);
-  --sf-text-primary: #f1f5f9;
-  --sf-text-secondary: #94a3b8;
+  /* Default / Light Mode Color Variables */
+  --sf-bg-primary: #ffffff;
+  --sf-bg-secondary: #f8fafc;
+  --sf-bg-tertiary: #f1f5f9;
+  --sf-bg-hover: rgba(8, 145, 178, 0.08);
+
+  /* Text Variables */
+  --sf-text-primary: #0f172a;
+  --sf-text-secondary: #475569;
   --sf-text-tertiary: #64748b;
-  --sf-accent: #06b6d4;
-  --sf-accent-hover: #0ea5e9;
-  --sf-accent-glow: rgba(6, 182, 212, 0.2);
-  --sf-danger: #ef4444;
-  --sf-danger-hover: #dc2626;
-  --sf-success: #22c55e;
-  --sf-warning: #f59e0b;
-  --sf-border: rgba(100, 116, 139, 0.2);
-  --sf-border-accent: rgba(6, 182, 212, 0.3);
+
+  /* Accents & Status Variables */
+  --sf-accent: #0891b2;
+  --sf-accent-hover: #0e7490;
+  --sf-accent-glow: rgba(8, 145, 178, 0.15);
+  --sf-danger: #dc2626;
+  --sf-danger-hover: #b91c1c;
+  --sf-success: #16a34a;
+  --sf-warning: #d97706;
+
+  /* Border Variables */
+  --sf-border: rgba(148, 163, 184, 0.3);
+  --sf-border-accent: rgba(8, 145, 178, 0.4);
+
+  /* Button Variables */
+  --sf-btn-primary-bg: linear-gradient(135deg, var(--sf-accent), var(--sf-accent-hover));
+  --sf-btn-primary-text: #ffffff;
+  --sf-btn-secondary-bg: var(--sf-bg-tertiary);
+  --sf-btn-secondary-text: var(--sf-text-secondary);
+  --sf-btn-secondary-border: var(--sf-border);
+  --sf-btn-secondary-hover-bg: rgba(148, 163, 184, 0.25);
+  --sf-btn-secondary-hover-text: var(--sf-text-primary);
+  --sf-btn-danger-bg: var(--sf-danger);
+  --sf-btn-danger-text: #ffffff;
+  --sf-btn-danger-hover-bg: var(--sf-danger-hover);
+
   --sf-radius: 10px;
   --sf-radius-sm: 7px;
   --sf-transition: 0.15s ease;
   --sf-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ─── Dark Mode Theme Overrides ────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode Background Variables */
+    --sf-bg-primary: #0f172a;
+    --sf-bg-secondary: #1e293b;
+    --sf-bg-tertiary: #334155;
+    --sf-bg-hover: rgba(6, 182, 212, 0.12);
+
+    /* Dark Mode Text Variables */
+    --sf-text-primary: #f8fafc;
+    --sf-text-secondary: #cbd5e1;
+    --sf-text-tertiary: #94a3b8;
+
+    /* Dark Mode Accents & Status Variables */
+    --sf-accent: #06b6d4;
+    --sf-accent-hover: #22d3ee;
+    --sf-accent-glow: rgba(6, 182, 212, 0.25);
+    --sf-danger: #ef4444;
+    --sf-danger-hover: #dc2626;
+    --sf-success: #22c55e;
+    --sf-warning: #f59e0b;
+
+    /* Dark Mode Border Variables */
+    --sf-border: rgba(148, 163, 184, 0.2);
+    --sf-border-accent: rgba(6, 182, 212, 0.4);
+
+    /* Dark Mode Button Variables */
+    --sf-btn-primary-bg: linear-gradient(135deg, var(--sf-accent), var(--sf-accent-hover));
+    --sf-btn-primary-text: #ffffff;
+    --sf-btn-secondary-bg: var(--sf-bg-tertiary);
+    --sf-btn-secondary-text: var(--sf-text-secondary);
+    --sf-btn-secondary-border: var(--sf-border);
+    --sf-btn-secondary-hover-bg: rgba(100, 116, 139, 0.35);
+    --sf-btn-secondary-hover-text: var(--sf-text-primary);
+    --sf-btn-danger-bg: var(--sf-danger);
+    --sf-btn-danger-text: #ffffff;
+    --sf-btn-danger-hover-bg: var(--sf-danger-hover);
+  }
 }
 
 * {
@@ -353,8 +415,8 @@ body {
 }
 
 .sf-btn-primary {
-  background: linear-gradient(135deg, var(--sf-accent), var(--sf-accent-hover));
-  color: #fff;
+  background: var(--sf-btn-primary-bg);
+  color: var(--sf-btn-primary-text);
 }
 
 .sf-btn-primary:hover:not(:disabled) {
@@ -363,23 +425,23 @@ body {
 }
 
 .sf-btn-secondary {
-  background: var(--sf-bg-tertiary);
-  color: var(--sf-text-secondary);
-  border: 1px solid var(--sf-border);
+  background: var(--sf-btn-secondary-bg);
+  color: var(--sf-btn-secondary-text);
+  border: 1px solid var(--sf-btn-secondary-border);
 }
 
 .sf-btn-secondary:hover:not(:disabled) {
-  background: rgba(100, 116, 139, 0.3);
-  color: var(--sf-text-primary);
+  background: var(--sf-btn-secondary-hover-bg);
+  color: var(--sf-btn-secondary-hover-text);
 }
 
 .sf-btn-danger {
-  background: var(--sf-danger);
-  color: #fff;
+  background: var(--sf-btn-danger-bg);
+  color: var(--sf-btn-danger-text);
 }
 
 .sf-btn-danger:hover:not(:disabled) {
-  background: var(--sf-danger-hover);
+  background: var(--sf-btn-danger-hover-bg);
   box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2);
 }
 
