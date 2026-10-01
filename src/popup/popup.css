@@ -1,7 +1,7 @@
 /**
  * SmartForm Saver — Popup Styles
  *
- * Professional dark-mode UI with teal accents.
+ * Clean black-and-white monochrome UI for both light and dark modes.
  * Designed for the standard extension popup dimensions (~400px wide).
  */
 
@@ -10,42 +10,46 @@
 :root {
   /* Default / Light Mode Color Variables */
   --sf-bg-primary: #ffffff;
-  --sf-bg-secondary: #f8fafc;
-  --sf-bg-tertiary: #f1f5f9;
-  --sf-bg-hover: rgba(8, 145, 178, 0.08);
+  --sf-bg-secondary: #f7f7f8;
+  --sf-bg-tertiary: #ebebed;
+  --sf-bg-hover: rgba(0, 0, 0, 0.05);
 
   /* Text Variables */
-  --sf-text-primary: #0f172a;
-  --sf-text-secondary: #475569;
-  --sf-text-tertiary: #64748b;
+  --sf-text-primary: #111111;
+  --sf-text-secondary: #555555;
+  --sf-text-tertiary: #888888;
 
   /* Accents & Status Variables */
-  --sf-accent: #0891b2;
-  --sf-accent-hover: #0e7490;
-  --sf-accent-glow: rgba(8, 145, 178, 0.15);
+  --sf-accent: #111111;
+  --sf-accent-hover: #333333;
+  --sf-accent-subtle: rgba(0, 0, 0, 0.08);
   --sf-danger: #dc2626;
   --sf-danger-hover: #b91c1c;
   --sf-success: #16a34a;
   --sf-warning: #d97706;
 
   /* Border Variables */
-  --sf-border: rgba(148, 163, 184, 0.3);
-  --sf-border-accent: rgba(8, 145, 178, 0.4);
+  --sf-border: rgba(0, 0, 0, 0.12);
+  --sf-border-accent: rgba(0, 0, 0, 0.3);
 
   /* Button Variables */
-  --sf-btn-primary-bg: linear-gradient(135deg, var(--sf-accent), var(--sf-accent-hover));
+  --sf-btn-primary-bg: #111111;
   --sf-btn-primary-text: #ffffff;
+  --sf-btn-primary-hover-bg: #333333;
   --sf-btn-secondary-bg: var(--sf-bg-tertiary);
   --sf-btn-secondary-text: var(--sf-text-secondary);
   --sf-btn-secondary-border: var(--sf-border);
-  --sf-btn-secondary-hover-bg: rgba(148, 163, 184, 0.25);
+  --sf-btn-secondary-hover-bg: rgba(0, 0, 0, 0.1);
   --sf-btn-secondary-hover-text: var(--sf-text-primary);
   --sf-btn-danger-bg: var(--sf-danger);
   --sf-btn-danger-text: #ffffff;
   --sf-btn-danger-hover-bg: var(--sf-danger-hover);
 
-  --sf-radius: 10px;
-  --sf-radius-sm: 7px;
+  /* Focus ring */
+  --sf-focus-ring: rgba(0, 0, 0, 0.4);
+
+  --sf-radius: 8px;
+  --sf-radius-sm: 6px;
   --sf-transition: 0.15s ease;
   --sf-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -55,40 +59,44 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /* Dark Mode Background Variables */
-    --sf-bg-primary: #0f172a;
-    --sf-bg-secondary: #1e293b;
-    --sf-bg-tertiary: #334155;
-    --sf-bg-hover: rgba(6, 182, 212, 0.12);
+    --sf-bg-primary: #111111;
+    --sf-bg-secondary: #1a1a1a;
+    --sf-bg-tertiary: #2a2a2a;
+    --sf-bg-hover: rgba(255, 255, 255, 0.07);
 
     /* Dark Mode Text Variables */
-    --sf-text-primary: #f8fafc;
-    --sf-text-secondary: #cbd5e1;
-    --sf-text-tertiary: #94a3b8;
+    --sf-text-primary: #f0f0f0;
+    --sf-text-secondary: #b0b0b0;
+    --sf-text-tertiary: #777777;
 
     /* Dark Mode Accents & Status Variables */
-    --sf-accent: #06b6d4;
-    --sf-accent-hover: #22d3ee;
-    --sf-accent-glow: rgba(6, 182, 212, 0.25);
+    --sf-accent: #f0f0f0;
+    --sf-accent-hover: #cccccc;
+    --sf-accent-subtle: rgba(255, 255, 255, 0.1);
     --sf-danger: #ef4444;
     --sf-danger-hover: #dc2626;
     --sf-success: #22c55e;
     --sf-warning: #f59e0b;
 
     /* Dark Mode Border Variables */
-    --sf-border: rgba(148, 163, 184, 0.2);
-    --sf-border-accent: rgba(6, 182, 212, 0.4);
+    --sf-border: rgba(255, 255, 255, 0.1);
+    --sf-border-accent: rgba(255, 255, 255, 0.25);
 
     /* Dark Mode Button Variables */
-    --sf-btn-primary-bg: linear-gradient(135deg, var(--sf-accent), var(--sf-accent-hover));
-    --sf-btn-primary-text: #ffffff;
+    --sf-btn-primary-bg: #f0f0f0;
+    --sf-btn-primary-text: #111111;
+    --sf-btn-primary-hover-bg: #cccccc;
     --sf-btn-secondary-bg: var(--sf-bg-tertiary);
     --sf-btn-secondary-text: var(--sf-text-secondary);
     --sf-btn-secondary-border: var(--sf-border);
-    --sf-btn-secondary-hover-bg: rgba(100, 116, 139, 0.35);
+    --sf-btn-secondary-hover-bg: rgba(255, 255, 255, 0.12);
     --sf-btn-secondary-hover-text: var(--sf-text-primary);
     --sf-btn-danger-bg: var(--sf-danger);
     --sf-btn-danger-text: #ffffff;
     --sf-btn-danger-hover-bg: var(--sf-danger-hover);
+
+    /* Focus ring */
+    --sf-focus-ring: rgba(255, 255, 255, 0.4);
   }
 }
 
@@ -127,7 +135,7 @@ body {
   justify-content: space-between;
   padding: 14px 16px 10px;
   border-bottom: 1px solid var(--sf-border);
-  background: linear-gradient(135deg, var(--sf-bg-primary), var(--sf-bg-secondary));
+  background: var(--sf-bg-primary);
 }
 
 .sf-popup-logo {
@@ -143,17 +151,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--sf-accent), var(--sf-accent-hover));
+  background: var(--sf-accent);
+  color: var(--sf-btn-primary-text);
   border-radius: 8px;
 }
 
 .sf-logo-text {
   font-size: 15px;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--sf-text-primary), var(--sf-accent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--sf-text-primary);
 }
 
 .sf-disabled-badge {
@@ -196,13 +202,13 @@ body {
 }
 
 .sf-nav-tab.active {
-  color: var(--sf-accent);
-  background: rgba(6, 182, 212, 0.1);
+  color: var(--sf-text-primary);
+  background: var(--sf-accent-subtle);
   font-weight: 600;
 }
 
 .sf-nav-tab:focus-visible {
-  outline: 2px solid var(--sf-accent);
+  outline: 2px solid var(--sf-focus-ring);
   outline-offset: -2px;
 }
 
@@ -344,7 +350,7 @@ body {
 .sf-value-field-name {
   font-size: 10px;
   font-weight: 600;
-  color: var(--sf-accent);
+  color: var(--sf-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -405,7 +411,7 @@ body {
 }
 
 .sf-btn:focus-visible {
-  outline: 2px solid var(--sf-accent);
+  outline: 2px solid var(--sf-focus-ring);
   outline-offset: 2px;
 }
 
@@ -420,8 +426,7 @@ body {
 }
 
 .sf-btn-primary:hover:not(:disabled) {
-  filter: brightness(1.1);
-  box-shadow: 0 2px 10px var(--sf-accent-glow);
+  background: var(--sf-btn-primary-hover-bg);
 }
 
 .sf-btn-secondary {
@@ -442,7 +447,6 @@ body {
 
 .sf-btn-danger:hover:not(:disabled) {
   background: var(--sf-btn-danger-hover-bg);
-  box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2);
 }
 
 .sf-btn-small {
@@ -512,7 +516,7 @@ body {
 .sf-form-select:focus,
 .sf-edit-input:focus {
   border-color: var(--sf-border-accent);
-  box-shadow: 0 0 0 3px var(--sf-accent-glow);
+  box-shadow: 0 0 0 2px var(--sf-accent-subtle);
 }
 
 .sf-form-input::placeholder,
@@ -524,7 +528,7 @@ body {
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   padding-right: 32px;
@@ -683,11 +687,11 @@ body {
 
 .sf-toggle input:checked + .sf-toggle-slider::before {
   transform: translateX(16px);
-  background: #fff;
+  background: var(--sf-btn-primary-text);
 }
 
 .sf-toggle input:focus-visible + .sf-toggle-slider {
-  box-shadow: 0 0 0 3px var(--sf-accent-glow);
+  box-shadow: 0 0 0 3px var(--sf-accent-subtle);
 }
 
 /* ─── Import/Export ───────────────────────────────────────────────── */
@@ -837,16 +841,18 @@ body {
 .sf-footer-link {
   background: none;
   border: none;
-  color: var(--sf-accent);
+  color: var(--sf-text-secondary);
   font-family: var(--sf-font);
   font-size: 10px;
   font-weight: 500;
   cursor: pointer;
   transition: color var(--sf-transition);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .sf-footer-link:hover {
-  color: var(--sf-accent-hover);
+  color: var(--sf-text-primary);
 }
 
 /* ─── Confirm Dialog ──────────────────────────────────────────────── */
@@ -890,3 +896,21 @@ body {
   gap: 8px;
   justify-content: flex-end;
 }
+
+/* ─── Monochrome Emoji ────────────────────────────────────────────── */
+/* Force all native-color emoji in the popup to render in grayscale   */
+/* so the UI stays fully black-and-white / monochrome.                */
+/* Danger buttons and status indicators are excluded to preserve      */
+/* semantic colors (red for destructive, green for success, etc.).     */
+
+.sf-logo-icon,
+.sf-nav-tab,
+.sf-search-icon,
+.sf-category-icon,
+.sf-empty-icon,
+.sf-settings-note,
+.sf-btn-primary,
+.sf-btn-secondary {
+  filter: grayscale(1);
+}
+
