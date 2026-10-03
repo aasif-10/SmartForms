@@ -1,5 +1,6 @@
 import React from 'react';
 import type { ExtensionSettings } from '../../shared/types';
+import { LockIcon } from './Icons';
 
 interface SettingsPanelProps {
   settings: ExtensionSettings;
@@ -50,7 +51,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ settings, onUpdate
       <div className="sf-settings-section">
         <h4 className="sf-settings-section-title">Privacy</h4>
         <p className="sf-settings-note">
-          🔒 All saved information is stored locally on your device. No data is ever sent to external servers.
+          <LockIcon size={13} />
+          <span>All saved information is stored locally on your device. No data is ever sent to external servers.</span>
         </p>
       </div>
 

@@ -4,6 +4,7 @@ import { CATEGORY_CONFIG } from '../../shared/constants/taxonomy';
 import { FIELD_TAXONOMY } from '../../shared/constants/taxonomy';
 import { SavedValueCard } from './SavedValueCard';
 import { EmptyState } from './EmptyState';
+import { getCategoryIcon, SavedIcon, SearchIcon } from './Icons';
 import type { FieldCategory } from '../../shared/types';
 
 interface SavedValuesListProps {
@@ -40,7 +41,7 @@ export const SavedValuesList: React.FC<SavedValuesListProps> = ({
       <EmptyState
         title="No saved information yet"
         subtitle="Fill out a form and SmartForm will offer to save your entries, or add information manually."
-        icon="📝"
+        icon={<SavedIcon size={32} />}
         action={{ label: 'Add Information', onClick: onAddClick }}
       />
     );
@@ -51,7 +52,7 @@ export const SavedValuesList: React.FC<SavedValuesListProps> = ({
       <EmptyState
         title="No results found"
         subtitle={`No saved information matches "${searchQuery}"`}
-        icon="🔍"
+        icon={<SearchIcon size={32} />}
       />
     );
   }
@@ -77,18 +78,22 @@ export const SavedValuesList: React.FC<SavedValuesListProps> = ({
         return (
           <div key={cat.key} className="sf-category-group">
             <div className="sf-category-header">
-              <span className="sf-category-icon" aria-hidden="true">{cat.icon}</span>
+              <span className="sf-category-icon" aria-hidden="true">
+                {getCategoryIcon(cat.key, 15)}
+              </span>
               <span className="sf-category-label">{cat.label}</span>
               <span className="sf-category-count">{catValues.length}</span>
             </div>
-            {catValues.map((v) => (
-              <SavedValueCard
-                key={v.id}
-                value={v}
-                onEdit={onEdit}
-                onDelete={onDelete}
-              />
-            ))}
+            <div className="sf-category-card-container">
+              {catValues.map((v) => (
+                <SavedValueCard
+                  key={v.id}
+                  value={v}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                />
+              ))}
+            </div>
           </div>
         );
       })}

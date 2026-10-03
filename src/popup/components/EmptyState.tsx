@@ -1,16 +1,22 @@
 import React from 'react';
+import { SavedIcon, SearchIcon } from './Icons';
 
 interface EmptyStateProps {
   title: string;
   subtitle?: string;
-  icon?: string;
+  icon?: React.ReactNode;
   action?: {
     label: string;
     onClick: () => void;
   };
 }
 
-export const EmptyState: React.FC<EmptyStateProps> = ({ title, subtitle, icon = '📋', action }) => (
+export const EmptyState: React.FC<EmptyStateProps> = ({
+  title,
+  subtitle,
+  icon = <SavedIcon size={32} />,
+  action,
+}) => (
   <div className="sf-empty-state">
     <div className="sf-empty-icon">{icon}</div>
     <h3 className="sf-empty-title">{title}</h3>
