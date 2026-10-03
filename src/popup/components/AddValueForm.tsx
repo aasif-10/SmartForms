@@ -31,7 +31,7 @@ export const AddValueForm: React.FC<AddValueFormProps> = ({ onSave, onCancel }) 
       setLabel('');
       onCancel();
     } else {
-      setError('Failed to save. Please try again.');
+      setError('Failed to save field. Please try again.');
     }
     setSaving(false);
   };
@@ -44,10 +44,10 @@ export const AddValueForm: React.FC<AddValueFormProps> = ({ onSave, onCancel }) 
 
   return (
     <form className="sf-add-form" onSubmit={handleSubmit}>
-      <h3 className="sf-add-title">Add Information</h3>
+      <h3 className="sf-add-title">Add field</h3>
 
       <div className="sf-form-group">
-        <label className="sf-form-label" htmlFor="sf-add-field">Field</label>
+        <label className="sf-form-label" htmlFor="sf-add-field">Field name</label>
         <select
           id="sf-add-field"
           className="sf-form-select"
@@ -55,7 +55,7 @@ export const AddValueForm: React.FC<AddValueFormProps> = ({ onSave, onCancel }) 
           onChange={(e) => setField(e.target.value as SemanticField)}
         >
           {groupedFields.map((group) => (
-            <optgroup key={group.key} label={`${group.icon} ${group.label}`}>
+            <optgroup key={group.key} label={group.label}>
               {group.fields.map((f) => (
                 <option key={f.key} value={f.key}>{f.label}</option>
               ))}
@@ -72,13 +72,13 @@ export const AddValueForm: React.FC<AddValueFormProps> = ({ onSave, onCancel }) 
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Enter value..."
+          placeholder="Enter field value..."
           autoFocus
         />
       </div>
 
       <div className="sf-form-group">
-        <label className="sf-form-label" htmlFor="sf-add-label">Label <span className="sf-form-optional">(optional)</span></label>
+        <label className="sf-form-label" htmlFor="sf-add-label">Tag / label <span className="sf-form-optional">(optional)</span></label>
         <input
           id="sf-add-label"
           className="sf-form-input"
@@ -94,10 +94,10 @@ export const AddValueForm: React.FC<AddValueFormProps> = ({ onSave, onCancel }) 
       <div className="sf-form-actions">
         <button
           type="submit"
-          className="sf-btn sf-btn-primary"
+          className="sf-btn sf-btn-primary sf-btn-block"
           disabled={saving || !value.trim()}
         >
-          {saving ? 'Saving...' : 'Save'}
+          {saving ? 'Saving...' : 'Save field'}
         </button>
         <button type="button" className="sf-btn sf-btn-secondary" onClick={onCancel}>
           Cancel

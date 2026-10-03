@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { SavedValue } from '../../shared/types';
 import { TAXONOMY_MAP } from '../../shared/constants/taxonomy';
+import { CopyIcon, CheckIcon, EditIcon, TrashIcon } from './Icons';
 
 interface SavedValueCardProps {
   value: SavedValue;
@@ -12,9 +13,17 @@ export const SavedValueCard: React.FC<SavedValueCardProps> = ({ value, onEdit, o
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(value.value);
   const [editLabel, setEditLabel] = useState(value.label ?? '');
+  const [copied, setCopied] = useState(false);
 
   const entry = TAXONOMY_MAP[value.field];
   const fieldLabel = entry?.label ?? value.field;
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(value.value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
 
   const handleSave = () => {
     if (editValue.trim()) {
@@ -58,7 +67,7 @@ export const SavedValueCard: React.FC<SavedValueCardProps> = ({ value, onEdit, o
           placeholder="Label (optional)"
           aria-label={`Edit ${fieldLabel} label`}
         />
-        <div className="sf-value-actions">
+        <div className="sf-value-actions-editing">
           <button className="sf-btn sf-btn-small sf-btn-primary" onClick={handleSave}>
             Save
           </button>
@@ -72,22 +81,29 @@ export const SavedValueCard: React.FC<SavedValueCardProps> = ({ value, onEdit, o
 
   return (
     <div className="sf-value-card" role="listitem">
-      <div className="sf-value-header">
-        <span className="sf-value-field-name">{fieldLabel}</span>
-        {value.label && <span className="sf-value-label-badge">{value.label}</span>}
+      <div className="sf-value-card-body">
+        <div className="sf-value-header">
+          <span className="sf-value-field-name">{fieldLabel}</span>
+          {value.label && <span className="sf-value-label-badge">{value.label}</span>}
+        </div>
+        <div className="sf-value-content">{value.value}</div>
       </div>
-      <div className="sf-value-content">{value.value}</div>
-      {value.usageCount > 0 && (
-        <div className="sf-value-meta">Used {value.usageCount} time{value.usageCount !== 1 ? 's' : ''}</div>
-      )}
       <div className="sf-value-actions">
+        <button
+          className={`sf-btn-icon ${copied ? 'sf-copied' : ''}`}
+          onClick={handleCopy}
+          aria-label={`Copy ${fieldLabel}`}
+          title={copied ? 'Copied!' : 'Copy to clipboard'}
+        >
+          {copied ? <CheckIcon size={14} /> : <CopyIcon size={14} />}
+        </button>
         <button
           className="sf-btn-icon"
           onClick={() => setIsEditing(true)}
           aria-label={`Edit ${fieldLabel}`}
           title="Edit"
         >
-          ✏️
+          <EditIcon size={13} />
         </button>
         <button
           className="sf-btn-icon sf-btn-icon-danger"
@@ -95,7 +111,7 @@ export const SavedValueCard: React.FC<SavedValueCardProps> = ({ value, onEdit, o
           aria-label={`Delete ${fieldLabel}`}
           title="Delete"
         >
-          🗑️
+          <TrashIcon size={13} />
         </button>
       </div>
     </div>

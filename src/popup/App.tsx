@@ -6,6 +6,13 @@ import { SavedValuesList } from './components/SavedValuesList';
 import { AddValueForm } from './components/AddValueForm';
 import { SettingsPanel } from './components/SettingsPanel';
 import { ImportExport } from './components/ImportExport';
+import {
+  LogoIcon,
+  SavedIcon,
+  AddIcon,
+  SettingsIcon,
+  LockIcon,
+} from './components/Icons';
 
 type Tab = 'saved' | 'add' | 'settings';
 
@@ -28,14 +35,22 @@ export const App: React.FC = () => {
       {/* Header */}
       <header className="sf-popup-header">
         <div className="sf-popup-logo">
-          <span className="sf-logo-icon">⚡</span>
+          <div className="sf-logo-badge">
+            <LogoIcon size={14} />
+          </div>
           <h1 className="sf-logo-text">SmartForm Saver</h1>
         </div>
-        {!settings.enabled && (
-          <div className="sf-disabled-badge" aria-label="Extension disabled">
-            Disabled
-          </div>
-        )}
+        <div className="sf-header-status">
+          {settings.enabled ? (
+            <span className="sf-status-active">
+              <span className="sf-status-dot">•</span> Autofill on
+            </span>
+          ) : (
+            <span className="sf-disabled-badge" aria-label="Extension disabled">
+              Autofill off
+            </span>
+          )}
+        </div>
       </header>
 
       {/* Navigation */}
@@ -47,7 +62,8 @@ export const App: React.FC = () => {
           aria-selected={activeTab === 'saved'}
           id="tab-saved"
         >
-          📋 Saved
+          <SavedIcon size={15} />
+          <span>Saved</span>
         </button>
         <button
           className={`sf-nav-tab ${activeTab === 'add' ? 'active' : ''}`}
@@ -56,7 +72,8 @@ export const App: React.FC = () => {
           aria-selected={activeTab === 'add'}
           id="tab-add"
         >
-          ➕ Add
+          <AddIcon size={15} />
+          <span>Add</span>
         </button>
         <button
           className={`sf-nav-tab ${activeTab === 'settings' ? 'active' : ''}`}
@@ -65,7 +82,8 @@ export const App: React.FC = () => {
           aria-selected={activeTab === 'settings'}
           id="tab-settings"
         >
-          ⚙️ Settings
+          <SettingsIcon size={15} />
+          <span>Settings</span>
         </button>
       </nav>
 
@@ -121,13 +139,16 @@ export const App: React.FC = () => {
 
       {/* Footer */}
       <footer className="sf-popup-footer">
-        <span className="sf-footer-text">v1.0.0 · All data stored locally</span>
+        <span className="sf-footer-left">
+          <LockIcon size={13} />
+          <span>Stored on this device only</span>
+        </span>
         <button
           className="sf-footer-link"
           onClick={() => chrome.runtime.openOptionsPage()}
-          aria-label="Open full settings page"
+          aria-label="Open settings page"
         >
-          Full Settings →
+          All settings
         </button>
       </footer>
     </div>

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import type { ExportData } from '../../shared/types';
+import { ExportIcon, ImportIcon, TrashIcon } from './Icons';
 
 interface ImportExportProps {
   onExport: () => Promise<ExportData | null>;
@@ -83,12 +84,14 @@ export const ImportExport: React.FC<ImportExportProps> = ({ onExport, onImport, 
       <h4 className="sf-settings-section-title">Data Management</h4>
 
       <div className="sf-ie-actions">
-        <button className="sf-btn sf-btn-primary sf-btn-block" onClick={handleExport} id="sf-export-btn">
-          📤 Export Data
+        <button className="sf-btn sf-btn-secondary sf-btn-block" onClick={handleExport} id="sf-export-btn">
+          <ExportIcon size={14} />
+          <span>Export data</span>
         </button>
 
         <button className="sf-btn sf-btn-secondary sf-btn-block" onClick={handleImportClick} id="sf-import-btn">
-          📥 Import Data
+          <ImportIcon size={14} />
+          <span>Import data</span>
         </button>
 
         <input
@@ -106,14 +109,15 @@ export const ImportExport: React.FC<ImportExportProps> = ({ onExport, onImport, 
             onClick={() => setShowClearConfirm(true)}
             id="sf-clear-btn"
           >
-            🗑️ Clear All Data
+            <TrashIcon size={14} />
+            <span>Clear all data</span>
           </button>
         ) : (
           <div className="sf-clear-confirm">
             <p className="sf-clear-warning">This will permanently delete all saved information. Are you sure?</p>
             <div className="sf-clear-actions">
               <button className="sf-btn sf-btn-danger" onClick={handleClearAll}>
-                Yes, Delete All
+                Yes, delete all
               </button>
               <button className="sf-btn sf-btn-secondary" onClick={() => setShowClearConfirm(false)}>
                 Cancel
