@@ -2,13 +2,19 @@ import React from 'react';
 import { LogoIcon, EditIcon, SavedIcon, CheckIcon, LockIcon } from '../popup/components/Icons';
 
 export const App: React.FC = () => {
+  const [error, setError] = React.useState<string | null>(null);
+
   const handleGetStarted = async () => {
+    setError(null);
     if (typeof chrome !== 'undefined' && chrome.action && typeof chrome.action.openPopup === 'function') {
       try {
         await chrome.action.openPopup();
       } catch (err) {
         console.error('Failed to open action popup:', err);
+        setError('Could not open the extension popup automatically. Please click the SmartForms icon in your browser toolbar.');
       }
+    } else {
+      setError('Please click the SmartForms icon in your browser toolbar to get started.');
     }
   };
 
@@ -63,7 +69,7 @@ export const App: React.FC = () => {
               </div>
               <h3 className="sf-step-title">Saved Automatically</h3>
               <p className="sf-step-text">
-                SmartForms identifies field types and securely saves values directly to local storage.
+                SmartForms identifies field types and saves values directly to local storage on your device.
               </p>
             </div>
 
@@ -88,9 +94,9 @@ export const App: React.FC = () => {
             <LockIcon size={18} />
           </div>
           <div className="sf-privacy-content">
-            <h3>100% Local & Private Data Storage</h3>
+            <h3>Local Data Storage</h3>
             <p>
-              Your saved data stays strictly on your device. SmartForms uses Chrome's local storage API to retain your values. No data is ever sent to external servers, cloud services, or analytics trackers.
+              Your saved form data stays locally on your device. SmartForms uses Chrome's local storage API (chrome.storage.local) to store your values.
             </p>
           </div>
         </section>
@@ -104,6 +110,11 @@ export const App: React.FC = () => {
               <polyline points="12 5 19 12 12 19" />
             </svg>
           </button>
+          {error && (
+            <div className="sf-onboarding-error" role="alert">
+              {error}
+            </div>
+          )}
         </div>
       </main>
     </div>
