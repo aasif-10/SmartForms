@@ -10,6 +10,7 @@ export default defineConfig({
       '@content': resolve(__dirname, 'src/content'),
       '@popup': resolve(__dirname, 'src/popup'),
       '@options': resolve(__dirname, 'src/options'),
+      '@onboarding': resolve(__dirname, 'src/onboarding'),
       '@background': resolve(__dirname, 'src/background'),
     },
   },
@@ -21,6 +22,7 @@ export default defineConfig({
       input: {
         popup: resolve(__dirname, 'src/popup/index.html'),
         options: resolve(__dirname, 'src/options/index.html'),
+        onboarding: resolve(__dirname, 'src/onboarding/index.html'),
         background: resolve(__dirname, 'src/background/service-worker.ts'),
         content: resolve(__dirname, 'src/content/content.ts'),
       },
