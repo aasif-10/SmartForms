@@ -42,7 +42,7 @@ export function useStorage() {
       } else {
         setError(resp.error ?? 'Failed to load values');
       }
-    } catch (err) {
+    } catch {
       setError('Failed to load saved information');
     } finally {
       setLoading(false);
