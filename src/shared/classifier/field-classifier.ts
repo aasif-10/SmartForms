@@ -187,7 +187,6 @@ export function classifyField(
 
   for (const { text, weight } of textsToMatch) {
     if (text.length < 2) continue;
-    const tokens = extractTokens(text);
 
     for (const entry of FIELD_TAXONOMY) {
       if (entry.sensitive) continue;
@@ -237,9 +236,6 @@ export function classifyField(
   }
 
   // ─── Special: "Name" Ambiguity Handling ─────────────────────────
-
-  const nameScore = fieldScores.get('full_name');
-  const firstNameScore = fieldScores.get('first_name');
 
   // If the primary text is just "Name" or "Your Name", handle ambiguity
   if (primaryText) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SavedIcon, SearchIcon } from './Icons';
+import { SavedIcon } from './Icons';
 
 interface EmptyStateProps {
   title: string;

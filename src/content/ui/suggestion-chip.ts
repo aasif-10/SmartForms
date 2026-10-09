@@ -212,7 +212,7 @@ export function hideSuggestion(field: HTMLElement): void {
  * Hide all active suggestions.
  */
 export function hideAllSuggestions(): void {
-  for (const [field, chip] of activeSuggestions) {
+  for (const chip of activeSuggestions.values()) {
     removeFromShadow(chip);
   }
   activeSuggestions.clear();

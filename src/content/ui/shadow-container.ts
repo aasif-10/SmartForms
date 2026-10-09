@@ -77,8 +77,6 @@ export function positionNearElement(
   offset: { top?: number; left?: number } = {}
 ): void {
   const rect = target.getBoundingClientRect();
-  const scrollX = window.scrollX;
-  const scrollY = window.scrollY;
 
   overlay.style.position = 'fixed';
   overlay.style.left = `${rect.left + (offset.left ?? 0)}px`;

@@ -294,7 +294,7 @@ export function hideSaveDialog(field: HTMLElement): void {
  * Hide all active save dialogs.
  */
 export function hideAllSaveDialogs(): void {
-  for (const [field, dialog] of activeDialogs) {
+  for (const dialog of activeDialogs.values()) {
     removeFromShadow(dialog);
   }
   activeDialogs.clear();
