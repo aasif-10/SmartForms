@@ -172,9 +172,6 @@ async function broadcastToContentScripts(message: ExtensionMessage): Promise<voi
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
     logger.info('SmartForm Saver installed');
-    chrome.tabs.create({
-      url: chrome.runtime.getURL('src/onboarding/index.html'),
-    });
   } else if (details.reason === 'update') {
     logger.info(`SmartForm Saver updated to ${chrome.runtime.getManifest().version}`);
   }
